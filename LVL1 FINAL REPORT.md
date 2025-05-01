@@ -2,7 +2,7 @@
 
 ---
 
-### **TASK 1: Simon Says**
+## **TASK 1: Simon Says**
 Simon Says is a simple electronic memory game: the user has to repeat a growing sequence of
 colors. The sequence is displayed by lighting up the LEDs. Each color also has a
 corresponding tone.
@@ -28,7 +28,7 @@ played, and the game restarts.
 
 
 
-### **TASK 2: Basics of MQTT protocol and other communication protocols**
+## **TASK 2: Basics of MQTT protocol and other communication protocols**
 
 🛰️ MQTT (Message Queuing Telemetry Transport) 
 📌 Introduction
@@ -73,7 +73,7 @@ This decouples devices from one another, allowing for flexible and scalable comm
 
 
 
-### **TASK 3: Basics of Creating a Website**
+## **TASK 3: Basics of Creating a Website**
 
 ![](https://github.com/TR33SS/forMARVEL/blob/main/LVL1/colorweb.PNG?raw=true)
 
@@ -87,7 +87,7 @@ For this task, I learned how websites work from both the front-end and back-end.
 
 ---
 
-### **TASK 4:  ESP32 CAM-Based Surveillance Robot using Arduino IDE**
+## **TASK 4:  ESP32 CAM-Based Surveillance Robot using Arduino IDE**
 For this task, I built a surveillance robot using the ESP32-CAM for video streaming and the ESP32 for controlling movement.
 
 ![](https://github.com/TR33SS/forMARVEL/blob/main/LVL1/20250423_225108.jpg?raw=true)
@@ -101,7 +101,7 @@ Since I couldn't do both tasks on a single ESP32-CAM, I split the work: the ESP3
 
 ---
 
-### **TASK 5: MQTT Publish and Subscribe Using Cloud MQTT**
+## **TASK 5: MQTT Publish and Subscribe Using Cloud MQTT**
 In this task, I used the HiveMQ broker, a public MQTT broker, to enable communication between a Python script (publisher) and an ESP32 (subscriber).
 
 ![](https://github.com/TR33SS/forMARVEL/blob/main/LVL1/20250424_013559.jpg?raw=true)
@@ -115,7 +115,7 @@ The Python script sends messages like "LED 1 ON" or "LED 2 OFF" to specific topi
 
 ---
 
-### **TASK 6: Sending Data to ThingSpeak**
+## **TASK 6: Sending Data to ThingSpeak**
 In this task, I used the DHT11 sensor and ESP32 to send temperature and humidity data to the ThingSpeak website using its API.
 
 ![](https://github.com/TR33SS/forMARVEL/blob/main/LVL1/20250424_004137.jpg?raw=true![])
@@ -129,7 +129,7 @@ The data was uploaded to ThingSpeak and displayed as a graph showing the tempera
 
 ---
 
-### **TASK 7: Communication Using I2C Protocol**
+## **TASK 7: Communication Using I2C Protocol**
 The I2C (Inter-Integrated Circuit) protocol is a serial communication method that allows multiple devices to communicate over just two wires: SDA (Data) and SCL (Clock). It’s used for short-distance communication between microcontrollers and peripheral devices like sensors and displays. 
 
 ![](https://github.com/TR33SS/forMARVEL/blob/main/LVL1/20250424_010059.jpg?raw=true)
@@ -143,7 +143,7 @@ I2C follows a master-slave setup, where one master device can control multiple s
 
 ---
 
-### **TASK 8: Flashing Morse Code**
+## **TASK 8: Flashing Morse Code**
 In this task, I set up an ESP32 to host a web server where users can enter a message through a simple HTML interface. The ESP32, connected to an LED, captures the message, converts it into Morse code, and then flashes the LED accordingly.
 
 ![](https://github.com/TR33SS/forMARVEL/blob/main/LVL1/20250424_012051.jpg?raw=true)
@@ -157,7 +157,7 @@ Each letter and number is represented by dots (short blinks) and dashes (long bl
 
 ---
 
-### **TASK 9: SOIL MOISTURE SENSOR**
+## **TASK 9: SOIL MOISTURE SENSOR**
 In this task, I used a Capacitive Soil Moisture Sensor with an ESP32 to check how wet or dry the soil is. The sensor works by creating an electric field, and when placed in soil, the amount of water affects this field. Wet soil gives a stronger signal, while dry soil gives a weaker one. This change is converted into an analog value that the ESP32 reads.
 
 ![](https://github.com/TR33SS/forMARVEL/blob/main/LVL1/20250424_003331.jpg?raw=true)
@@ -171,7 +171,7 @@ The ESP32 displays the moisture level on the serial monitor. If the analog value
 
 ---
 
-### **Task 10: Read and Display Vitals**
+## **Task 10: Read and Display Vitals**
 
 ![](https://github.com/TR33SS/forMARVEL/blob/main/LVL1/20250424_024206%20(10).jpg?raw=true)
 
@@ -184,7 +184,7 @@ For this task, I used two phototransistors, a red LED, and an IR sensor to measu
 
 ---
 
-### **TASK 11: Fire alaram system with E-mail alerts**
+## **TASK 11: Fire alaram system with E-mail alerts**
 For this task, I used an infrared flame sensor and an ESP32. The flame sensor detects infrared radiation emitted by fire using a photodiode that responds to the specific light wavelengths produced during combustion. When a flame is present, the sensor sends a digital signal to the ESP32.
 
 ![](https://github.com/TR33SS/forMARVEL/blob/main/LVL1/20250423_232616.jpg?raw=true)
