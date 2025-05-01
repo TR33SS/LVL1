@@ -1,0 +1,63 @@
+#include <WiFi.h>
+#include <HTTPClient.h>
+#include <DHT.h>
+
+// Wi-Fi credentials
+const char* ssid = "your_wifi_ssid";               // Replace with your Wi-Fi SSID
+const char* password = "your_wifi_password";       // Replace with your Wi-Fi password
+
+// ThingSpeak API configuration
+const char* server = "http://api.thingspeak.com/update";
+String apiKey = "your_thingspeak_api_key";         // Replace with your ThingSpeak Write API key
+
+// DHT sensor configuration
+#define DHTPIN 4          // GPIO pin connected 
+#define DHTTYPE DHT11     // DHT11 sensor type OR DHT22 sensor type
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(115200);
+  dht.begin();
+
+  // Connect to Wi-Fi
+  WiFi.begin(ssid, password);
+  Serial.print("Connecting to Wi-Fi");
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.print(".");
+  }
+  Serial.println("\nConnected to Wi-Fi");
+}
+
+void loop() {
+  if (WiFi.status() == WL_CONNECTED) {
+    float temperature = dht.readTemperature();
+
+    if (isnan(temperature)) {
+      Serial.println("Failed to read from DHT sensor!");
+      return;
+    }
+
+    HTTPClient http;
+
+    String url = String(server) + "?api_key=" + apiKey + "&field1=" + String(temperature, 2); // Round to 2 decimal places
+    http.begin(url);
+    int httpResponseCode = http.GET();
+
+    if (httpResponseCode > 0) {
+      Serial.print("Temperature posted successfully: ");
+      Serial.println(temperature);
+      Serial.print("HTTP Response code: ");
+      Serial.println(httpResponseCode);
+    } else {
+      Serial.print("Error in HTTP request. Code: ");
+      Serial.println(httpResponseCode);
+    }
+
+    http.end();  // Close connection
+  } else {
+    Serial.println("Wi-Fi not connected");
+  }
+
+  delay(15000);  // Wait 15 seconds (ThingSpeak rate limit is 15s for free accounts)
+}
