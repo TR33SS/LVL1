@@ -1,0 +1,230 @@
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#include <Wire.h>
+
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+#define OLED_RESET -1
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+// Musical Notes (Add your provided frequencies here)
+#define NOTE_C4  262
+#define NOTE_E4  330
+#define NOTE_G4  392
+#define NOTE_C5  523
+#define NOTE_D5  587
+#define NOTE_DS5 622
+#define NOTE_CS5 554
+#define NOTE_E5  659   // Add missing note frequency for E5
+#define NOTE_G5  784   // Add missing note frequency for G5
+
+// Assign tones to buttons
+const int buttonTones[] = {
+  NOTE_C4, // Red
+  NOTE_E4, // Blue
+  NOTE_G4, // Green
+  NOTE_C5  // Yellow
+};
+
+#define BUZZER_PIN 23
+
+const uint8_t ledPins[] =  {2, 4, 17, 18};
+const uint8_t buttonPins[] = {0, 16, 5, 19};
+
+#define MAX_GAME_LENGTH 100
+byte gameSequence[MAX_GAME_LENGTH] = {0};
+byte gameIndex = 0;
+
+void setup() {
+  Serial.begin(115200);
+
+  for (byte i = 0; i < 4; i++) {
+    pinMode(ledPins[i], OUTPUT);
+    pinMode(buttonPins[i], INPUT_PULLUP);
+  }
+
+  pinMode(BUZZER_PIN, OUTPUT);
+
+  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+    Serial.println(F("SSD1306 allocation failed"));
+    for (;;);
+  }
+
+  display.clearDisplay();
+  display.setTextSize(2);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(0, 0);
+  display.println("Simon Says");
+  display.display();
+  delay(2000);
+
+  randomSeed(analogRead(34));
+
+  // Play the game beginning sound
+  playGameStartSound();
+
+  // Blink LEDs at the start to signal the beginning of the game
+  blinkStartLed();
+}
+
+void playGameStartSound() {
+  // Play a simple melody to signal game start
+  tone(BUZZER_PIN, NOTE_C5);
+  delay(300);
+  tone(BUZZER_PIN, NOTE_E5);
+  delay(300);
+  tone(BUZZER_PIN, NOTE_G5);
+  delay(300);
+  noTone(BUZZER_PIN);
+}
+
+void blinkStartLed() {
+  for (byte i = 0; i < 4; i++) {
+    digitalWrite(ledPins[i], HIGH);
+  }
+  delay(500);  // Blink delay
+  for (byte i = 0; i < 4; i++) {
+    digitalWrite(ledPins[i], LOW);
+  }
+  delay(500);  // Blink delay
+  for (byte i = 0; i < 4; i++) {
+    digitalWrite(ledPins[i], HIGH);
+  }
+  delay(500);  // Blink delay
+  for (byte i = 0; i < 4; i++) {
+    digitalWrite(ledPins[i], LOW);
+  }
+}
+
+void buzzNote(int note, int duration = 200) {
+  tone(BUZZER_PIN, note, duration);
+  delay(duration);
+  noTone(BUZZER_PIN);
+}
+
+void showMessage(const char* msg, int size = 2, int delayMs = 1000) {
+  display.clearDisplay();
+  display.setTextSize(size);
+  display.setCursor(0, 0);
+  display.println(msg);
+  display.display();
+  delay(delayMs);
+}
+
+void lightLed(byte index) {
+  digitalWrite(ledPins[index], HIGH);
+  buzzNote(buttonTones[index], 200);
+  delay(100);
+  digitalWrite(ledPins[index], LOW);
+}
+
+void playSequence() {
+  showMessage("Watch...", 2, 1000);
+  for (int i = 0; i < gameIndex; i++) {
+    lightLed(gameSequence[i]);
+    delay(200);
+  }
+}
+
+byte readButtons() {
+  showMessage("Your Turn!", 2, 300);
+  while (true) {
+    for (byte i = 0; i < 4; i++) {
+      if (digitalRead(buttonPins[i]) == LOW) {
+        while (digitalRead(buttonPins[i]) == LOW); // debounce
+        return i;
+      }
+    }
+    delay(1);
+  }
+}
+
+bool checkUserSequence() {
+  for (int i = 0; i < gameIndex; i++) {
+    byte expected = gameSequence[i];
+    byte actual = readButtons();
+    lightLed(actual);
+    if (actual != expected) {
+      return false;
+    }
+  }
+  showMessage("Correct!", 2, 1000);
+  return true;
+}
+
+void playLevelUpAnimation() {
+  showMessage("Level up!", 2, 700);
+  for (byte i = 0; i < 4; i++) {
+    digitalWrite(ledPins[i], HIGH);
+    buzzNote(buttonTones[i], 100);
+    delay(100);
+    digitalWrite(ledPins[i], LOW);
+    delay(100);
+  }
+}
+
+void gameOver() {
+  int finalScore = gameIndex - 1;  // Store score before resetting
+
+  Serial.print("Game over! Your score: ");
+  Serial.println(finalScore);
+
+  gameIndex = 0;  // Reset game index
+  delay(200);
+
+  // Play a Wah-Wah-Wah-Wah sound
+  tone(BUZZER_PIN, NOTE_DS5);
+  delay(300);
+  tone(BUZZER_PIN, NOTE_D5);
+  delay(300);
+  tone(BUZZER_PIN, NOTE_CS5);
+  delay(300);
+  for (byte i = 0; i < 10; i++) {
+    for (int pitch = -10; pitch <= 10; pitch++) {
+      tone(BUZZER_PIN, NOTE_C5 + pitch);
+      delay(5);
+    }
+  }
+  noTone(BUZZER_PIN);
+  delay(500);
+
+  showMessage("Wrong!", 2, 1000); //here
+  display.setTextSize(2); //change it 
+  display.setCursor(0, 30);
+  display.print("Score: ");
+  display.println(finalScore);  // Display the correct score
+  display.display();
+
+  delay(1000);
+
+  // Flash all LEDs three times as a game over effect
+  for (int i = 0; i < 3; i++) {
+    for (byte j = 0; j < 4; j++) {
+      digitalWrite(ledPins[j], HIGH);
+    }
+    buzzNote(200, 200);
+    delay(300);
+    for (byte j = 0; j < 4; j++) {
+      digitalWrite(ledPins[j], LOW);
+    }
+    delay(300);
+  }
+
+  gameIndex = 0;
+  showMessage("Simon Says", 2, 1000);
+}
+
+void loop() {
+  gameSequence[gameIndex] = random(0, 4);
+  gameIndex++;
+  if (gameIndex >= MAX_GAME_LENGTH) gameIndex = MAX_GAME_LENGTH - 1;
+
+  playSequence();
+
+  if (!checkUserSequence()) {
+    gameOver();
+  } else {
+    playLevelUpAnimation();
+    delay(500);
+  }
+}
