@@ -1,0 +1,31 @@
+#define SOIL_MOISTURE_PIN 34  // Analog pin connected to soil moisture sensor
+#define MOISTURE_THRESHOLD 500  // Threshold below which soil is considered dry
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(SOIL_MOISTURE_PIN, INPUT);
+}
+
+void loop() {
+  // Read raw analog value
+  int moistureLevel = analogRead(SOIL_MOISTURE_PIN);
+
+  // Convert to moisture percentage (100% = wet, 0% = dry)
+  int moisturePercent = map(moistureLevel, 0, 4095, 100, 0);
+
+  // Print results to Serial Monitor
+  Serial.print("Soil Moisture Level (raw): ");
+  Serial.print(moistureLevel);
+  Serial.print(" | Moisture (%): ");
+  Serial.print(moisturePercent);
+  Serial.println(" %");
+
+  // Check if soil is dry
+  if (moistureLevel < MOISTURE_THRESHOLD) {
+    Serial.println(" Alert: Soil moisture level is LOW!");
+  } else {
+    Serial.println(" Soil moisture is sufficient.");
+  }
+
+  delay(2000);  // Wait 2 seconds before next reading
+}
