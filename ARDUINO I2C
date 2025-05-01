@@ -1,0 +1,26 @@
+#include <Wire.h>
+
+#define I2C_SLAVE_ADDRESS 0x04
+
+String message = "";
+
+void receiveEvent(int bytes) {
+  message = "";  // Reset message
+  while (Wire.available()) {
+    char c = Wire.read();
+    message += c;
+  }
+  Serial.print("Received message: ");
+  Serial.println(message);
+}
+
+void setup() {
+  Serial.begin(9600);
+  Wire.begin(I2C_SLAVE_ADDRESS);
+  Wire.onReceive(receiveEvent);
+  Serial.println("Arduino ready to receive messages via I2C");
+}
+
+void loop() {
+  // Nothing required here
+}
