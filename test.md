@@ -9,7 +9,6 @@ corresponding tone.
 
 ![](https://github.com/TR33SS/forMARVEL/blob/main/LVL1/20250427_204542.jpg?raw=true)
 
-
 In each turn, the game will play the sequence, and then wait for the user to repeat
 the sequence by pressing the buttons according to the color sequence. If the user
 repeated the sequence correctly, the game will play a "leveling-up" sound, add a new
@@ -22,9 +21,12 @@ played, and the game restarts.
 
 ---
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/_Amx9fiMfHA?si=8rFLYoBAuXU5zV_o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe height="315" src="https://www.youtube.com/embed/_Amx9fiMfHA?si=8rFLYoBAuXU5zV_o"></iframe>
 
 ---
+```
+```
+
 
 
 
@@ -40,18 +42,21 @@ MQTT (Message Queuing Telemetry Transport)
 Introduction
 
 MQTT is a lightweight and efficient messaging protocol.  
-It was originally designed for networks that are low-bandwidth, high-latency, or unreliable.  
+It was originally designed for networks that are low-bandwidth, high-latency, or unreliable. 
+ 
 This makes it ideal for Internet of Things (IoT) applications.  
 MQTT uses a publish-subscribe (pub/sub) messaging model.  
 This model is more efficient than traditional client-server communication.  
 It’s especially useful for devices with limited resources, like sensors, wearables, and embedded systems.
 
-Key Components  
+Key Components 
+ 
 Client: A device (like a sensor or application) that publishes or subscribes to messages.  
 Broker: A server that receives all messages from publishers and routes them to subscribers.  
 Topic: A string that defines how messages are categorized and filtered. Topics are hierarchical, for example: home/livingroom/temperature.
 
-How MQTT Works  
+How MQTT Works
+ 
 A publisher sends a message to a specific topic.  
 The broker receives the message and forwards it to all subscribers of that topic.  
 Devices subscribe to specific topics to receive relevant data.  
@@ -133,6 +138,8 @@ Use Cases: Home security systems, smart locks, smart energy devices.
 
 ```
 ---
+```
+```
 
 
 
@@ -147,9 +154,11 @@ For this task, I learned how websites work from both the front-end and back-end.
 
 ---
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/cvlxigZiR78?si=2RsKofGUCvDuK_Aw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe height="315" src="https://www.youtube.com/embed/cvlxigZiR78?si=2RsKofGUCvDuK_Aw"></iframe>
 
 ---
+```
+```
 
 
 
@@ -164,9 +173,11 @@ Since I couldn't do both tasks on a single ESP32-CAM, I split the work: the ESP3
 
 ---
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/_0svTEkJVTs?si=Jbt2kRfql6Dg5fVG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe height="315" src="https://www.youtube.com/embed/_0svTEkJVTs?si=Jbt2kRfql6Dg5fVG"></iframe>
 
 ---
+```
+```
 
 
 
@@ -183,9 +194,12 @@ The Python script sends messages like "LED 1 ON" or "LED 2 OFF" to specific topi
 
 ---
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/wgJ2SzBcFAo?si=h2BIc0D8ML10DA6z" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe height="315" src="https://www.youtube.com/embed/wgJ2SzBcFAo?si=h2BIc0D8ML10DA6z"></iframe>
 
 ---
+```
+```
+
 
 
 
@@ -204,9 +218,12 @@ It uses a thermistor internally to detect temperature.
 
 ---
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/AlCcWPXMWC8?si=5p05JzXKVD7hy82M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe height="315" src="https://www.youtube.com/embed/AlCcWPXMWC8?si=5p05JzXKVD7hy82M"></iframe>
 
 ---
+```
+```
+
 
 
 
@@ -222,13 +239,11 @@ I2C follows a master-slave setup, where one master device can control multiple s
 
 ---
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dw3nten0KtI?si=HLdIzMNc2-CmaN4y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe height="315" src="https://www.youtube.com/embed/dw3nten0KtI?si=HLdIzMNc2-CmaN4y"></iframe>
 
 ---
-
-
-
----
+```
+```
 
 ## **TASK 8: Flashing Morse Code**
 In this task, I set up an ESP32 to host a web server where users can enter a message through a simple HTML interface. The ESP32, connected to an LED, captures the message, converts it into Morse code, and then flashes the LED accordingly.
@@ -241,13 +256,12 @@ Each letter and number is represented by dots (short blinks) and dashes (long bl
 
 ---
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/jRET0_93eJU?si=5NTpD_W2adjtibrg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe height="315" src="https://www.youtube.com/embed/jRET0_93eJU?si=5NTpD_W2adjtibrg"></iframe>
 
 ---
+```
+```
 
-
-
----
 
 ## **TASK 9: SOIL MOISTURE SENSOR**
 In this task, I used a Capacitive Soil Moisture Sensor with an ESP32 to check how wet or dry the soil is. The sensor works by creating an electric field, and when placed in soil, the amount of water affects this field. Wet soil gives a stronger signal, while dry soil gives a weaker one. This change is converted into an analog value that the ESP32 reads.
@@ -260,15 +274,21 @@ The ESP32 displays the moisture level on the serial monitor. If the analog value
 
 ---
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/PQ6eaDFVtzI?si=lc_i413c9IUaY_DA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe height="315" src="https://www.youtube.com/embed/PQ6eaDFVtzI?si=lc_i413c9IUaY_DA"></iframe>
 
 ---
 
+```
+```
 
 
----
+
+
+
 
 ## **Task 10: Read and Display Vitals**
+
+Failed to do this as per task per some what built a prototype.
 
 ![](https://github.com/TR33SS/forMARVEL/blob/main/LVL1/20250424_024206%20(10).jpg?raw=true)
 
@@ -276,8 +296,12 @@ For this task, I used two phototransistors, a red LED, and an IR sensor to measu
 
 ---
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Rcgef1AF710?si=-nxRMh-gGcCsopsX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe height="315" src="https://www.youtube.com/embed/Rcgef1AF710?si=-nxRMh-gGcCsopsX"></iframe>
+
 ---
+
+```
+```
 
 
 
@@ -292,4 +316,16 @@ The ESP32, always connected to Wi-Fi, continuously monitors the sensor. When fir
 
 ---
 
-<iframe width="560
+<iframe height="315" src="https://www.youtube.com/embed/gBO4x-jJo9M?si=Z9fuo8c5VKGEh15N"></iframe>
+
+---
+
+
+
+```
+                                                                                           THANK YOU!
+
+```
+
+---
+
